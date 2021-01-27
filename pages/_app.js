@@ -28,6 +28,10 @@ const theme = db.theme;
 export default function App({ Component, pageProps }) {
   return (
     <>
+      <head>
+        <title>{db.title}</title>
+        <meta id="og-image" property="og:image" content={db.bg} />
+      </head>
       <ThemeProvider theme={theme}>
         <GlobalStyle />
         <Component {...pageProps} />

@@ -23,7 +23,7 @@ export default function Home() {
       <QuizContainer>
         <Widget>
           <Widget.Header>
-            <h1>Lorem ipsum dolor sit amet</h1>
+            <h1>{db.title}</h1>
           </Widget.Header>
           <Widget.Content>
             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
@@ -31,10 +31,8 @@ export default function Home() {
         </Widget>
 
         <Widget>
-          <Widget.Header>
-            <h1>Quiz da Galera</h1>
-          </Widget.Header>
           <Widget.Content>
+            <h1>Quiz da Galera</h1>
             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
           </Widget.Content>
         </Widget>
