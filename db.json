@@ -27,7 +27,10 @@
     }
   ],
   "external": [
-    ""
+    "https://aluraquiz-css.omariosouto.vercel.app/",
+    "https://mr-robot-quiz-alura.bryanauta.vercel.app/",
+    "https://norsequiz.devinicius.vercel.app/",
+    "https://dbquiz-base.joaofnr.vercel.app/"
   ],
   "theme": {
     "colors": {

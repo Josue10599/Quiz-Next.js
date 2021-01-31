@@ -45,7 +45,18 @@ export default function Home() {
         <Widget>
           <Widget.Content>
             <h1>Quiz da Galera</h1>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+            <ul>
+              {db.external.map((url) => {
+                const [projectName, githubUser] = url.replace(/(h)\w+\W+/, '').replace(/(.v)\w+(.)+\w\//, '').split('.');
+                return (
+                  <li key={url}>
+                    <Widget.Topic href={`/quiz/${projectName}___${githubUser}?name=${name}`} disabled={name.length === 0}>
+                      {`${githubUser}/${projectName}`}
+                    </Widget.Topic>
+                  </li>
+                );
+              })}
+            </ul>
           </Widget.Content>
         </Widget>
         <Footer />

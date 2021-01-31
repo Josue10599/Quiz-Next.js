@@ -1,17 +1,17 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import db from '../db.json';
-import Widget from '../src/components/Widget';
-import Footer from '../src/components/Footer';
-import GitHubCorner from '../src/components/GitHubCorner';
-import QuizBackground from '../src/components/QuizBackground';
-import QuizContainer from '../src/components/QuizContainer';
-import QuizLogo from '../src/components/QuizLogo';
-import Button from '../src/components/Button';
-import ScreenStates from '../src/Model/ScreenStates';
-import QuestionState from '../src/Model/QuestionState';
-import AlternativesForm from '../src/components/AlternativeForm';
+import Widget from '../../components/Widget';
+import Footer from '../../components/Footer';
+import GitHubCorner from '../../components/GitHubCorner';
+import QuizBackground from '../../components/QuizBackground';
+import QuizContainer from '../../components/QuizContainer';
+import QuizLogo from '../../components/QuizLogo';
+import Button from '../../components/Button';
+import ScreenStates from '../../model/ScreenStates';
+import QuestionState from '../../model/QuestionState';
+import AlternativesForm from '../../components/AlternativeForm';
+import BackLinkArrow from '../../components/BackLinkArrow';
 
 function LoadingWidget() {
   return (
@@ -31,6 +31,7 @@ function FinishedWidget({ results }) {
   return (
     <Widget>
       <Widget.Header>
+        <BackLinkArrow href="/" />
         <h1>Parabéns você terminou!</h1>
       </Widget.Header>
       <Widget.Content>
@@ -65,6 +66,7 @@ function QuestionWidget({
   return (
     <Widget>
       <Widget.Header>
+        <BackLinkArrow href="/" />
         <h3>{`Pergunta ${index + 1} de ${size}`}</h3>
       </Widget.Header>
       <img
@@ -92,7 +94,7 @@ function QuestionWidget({
               addResult(result);
               onSubmit();
               setQuestionState(QuestionState.DEFAULT);
-              setSelectedAlternative(undefined);
+              setSelectedAlternative(-1);
             }, 1 * 1000);
           }}
         >
@@ -110,7 +112,7 @@ function QuestionWidget({
                   style={{ display: 'none' }}
                   id={alternativeId}
                   name={questionId}
-                  onChange={() => setSelectedAlternative(alternativeIndex)}
+                  onClick={() => setSelectedAlternative(alternativeIndex)}
                   type="radio"
                 />
                 {alternative}
@@ -140,7 +142,7 @@ QuestionWidget.propTypes = {
   onSubmit: PropTypes.func.isRequired,
 };
 
-export default function Quiz() {
+export default function QuizPage({ db }) {
   const [screenState, setScreenState] = React.useState(ScreenStates.LOADING);
   const [currentQuestion, setCurrentQuestion] = React.useState(0);
   const [results, setResults] = React.useState([]);
@@ -152,6 +154,7 @@ export default function Quiz() {
   }
 
   React.useEffect(() => setTimeout(() => setScreenState(ScreenStates.SUCCESS), 1 * 1000), []);
+
   function handleSubmit() {
     const nextQuestion = currentQuestion + 1;
     if (size === nextQuestion) setScreenState(ScreenStates.FINISH);
@@ -179,3 +182,16 @@ export default function Quiz() {
     </QuizBackground>
   );
 }
+
+QuizPage.propTypes = {
+  db: PropTypes.shape({
+    questions: PropTypes.arrayOf(PropTypes.shape({
+      title: PropTypes.string,
+      image: PropTypes.string,
+      description: PropTypes.string,
+      answer: PropTypes.number,
+      alternatives: PropTypes.arrayOf(PropTypes.string),
+    })).isRequired,
+    bg: PropTypes.string.isRequired,
+  }).isRequired,
+};
