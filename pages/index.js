@@ -2,6 +2,7 @@ import React from 'react';
 import { useRouter } from 'next/router';
 
 import db from '../db.json';
+import Link from '../src/components/Link';
 import Widget from '../src/components/Widget';
 import Footer from '../src/components/Footer';
 import GitHubCorner from '../src/components/GitHubCorner';
@@ -50,7 +51,11 @@ export default function Home() {
                 const [projectName, githubUser] = url.replace(/(h)\w+\W+/, '').replace(/(.v)\w+(.)+\w\//, '').split('.');
                 return (
                   <li key={url}>
-                    <Widget.Topic href={`/quiz/${projectName}___${githubUser}?name=${name}`} disabled={name.length === 0}>
+                    <Widget.Topic
+                      as={Link}
+                      href={`/quiz/${projectName}___${githubUser}?name=${name}`}
+                      disabled={name.length === 0}
+                    >
                       {`${githubUser}/${projectName}`}
                     </Widget.Topic>
                   </li>

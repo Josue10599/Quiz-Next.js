@@ -4,7 +4,7 @@ import PropTypes, { string } from 'prop-types';
 import { ThemeProvider } from 'styled-components';
 import QuizScreen from '../../src/screens/Quiz';
 
-export default function QuizDaGalera({ dbExterno }) {
+export default function QuizDaGaleraPage({ dbExterno }) {
   return (
     <ThemeProvider theme={dbExterno.theme}>
       <QuizScreen db={dbExterno} />
@@ -34,7 +34,7 @@ export async function getServerSideProps(context) {
   }
 }
 
-QuizDaGalera.propTypes = {
+QuizDaGaleraPage.propTypes = {
   dbExterno: PropTypes.shape({
     bg: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,

@@ -1,12 +1,12 @@
 import React from 'react';
 import { ThemeProvider } from 'styled-components';
 import QuizScreen from '../../src/screens/Quiz';
-import db from '../../db.json';
+import database from '../../db.json';
 
 export default function QuizDaGaleraPage() {
   return (
-    <ThemeProvider theme={db.theme}>
-      <QuizScreen db={db} />
+    <ThemeProvider theme={database.theme}>
+      <QuizScreen db={database} />
     </ThemeProvider>
   );
 }

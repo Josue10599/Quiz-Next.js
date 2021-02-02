@@ -2,8 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import Widget from '../../components/Widget';
-import Footer from '../../components/Footer';
-import GitHubCorner from '../../components/GitHubCorner';
 import QuizBackground from '../../components/QuizBackground';
 import QuizContainer from '../../components/QuizContainer';
 import QuizLogo from '../../components/QuizLogo';
@@ -143,9 +141,9 @@ QuestionWidget.propTypes = {
 };
 
 export default function QuizPage({ db }) {
-  const [screenState, setScreenState] = React.useState(ScreenStates.LOADING);
-  const [currentQuestion, setCurrentQuestion] = React.useState(0);
   const [results, setResults] = React.useState([]);
+  const [currentQuestion, setCurrentQuestion] = React.useState(0);
+  const [screenState, setScreenState] = React.useState(ScreenStates.LOADING);
   const size = db.questions.length;
   const question = db.questions[currentQuestion];
 
@@ -153,7 +151,11 @@ export default function QuizPage({ db }) {
     setResults([...results, result]);
   }
 
-  React.useEffect(() => setTimeout(() => setScreenState(ScreenStates.SUCCESS), 1 * 1000), []);
+  React.useEffect(() => {
+    setTimeout(() => {
+      setScreenState(ScreenStates.SUCCESS);
+    }, 1 * 1000);
+  }, []);
 
   function handleSubmit() {
     const nextQuestion = currentQuestion + 1;
@@ -176,9 +178,7 @@ export default function QuizPage({ db }) {
           size={size}
         />
         )}
-        <Footer />
       </QuizContainer>
-      <GitHubCorner projectUrl="https://github.com/Josue10599/Quiz-Next.js" />
     </QuizBackground>
   );
 }
